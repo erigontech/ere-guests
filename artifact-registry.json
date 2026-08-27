@@ -73,6 +73,20 @@
                     "vk_sha256": "ad94ad82ad310fda4ab8e8e91e7b4826edaa20e9c4e76f479ed7ca3482e3755c"
                 }
             ]
+        },
+        {
+            "name": "zilkworm",
+            "version": "local-dev",
+            "artifacts": [
+                {
+                    "zkvm": "sp1",
+                    "zkvm_version": "v6.4.0",
+                    "elf_url": "https://github.com/erigontech/z6m/releases/download/local-dev/stateless-validator-zilkworm-sp1.elf",
+                    "elf_sha256": "fb0b36cb93e6ddb6bce429bf1ce392a2afd19263d30e32d24c9514b290f85fd5",
+                    "vk_url": "https://github.com/erigontech/z6m/releases/download/local-dev/stateless-validator-zilkworm-sp1.vk",
+                    "vk_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+                }
+            ]
         }
     ]
 }

@@ -49,6 +49,8 @@ pub enum StatelessValidatorKind {
     Reth,
     /// Zesu stateless validator.
     Zesu,
+    /// Zilkworm stateless validator.
+    Zilkworm,
 }
 
 impl StatelessValidatorKind {
