@@ -163,7 +163,7 @@ mod tests {
     #[test]
     fn parses_active_registry() {
         let registry = ArtifactRegistry::load().unwrap();
-        assert_eq!(registry.stateless_validators.len(), 4);
+        assert_eq!(registry.stateless_validators.len(), 5);
 
         let all_zkvms: &[zkVMKind] = &[zkVMKind::OpenVM, zkVMKind::SP1, zkVMKind::Zisk];
         for (kind, expected_version, expected_zkvms) in [
@@ -178,6 +178,11 @@ mod tests {
                 StatelessValidatorKind::Nimbus,
                 "v0.1.0-alpha",
                 &[zkVMKind::Zisk],
+            ),
+            (
+                StatelessValidatorKind::Zilkworm,
+                "local-dev",
+                &[zkVMKind::SP1],
             ),
         ] {
             let validator = registry

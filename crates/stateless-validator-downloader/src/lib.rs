@@ -384,6 +384,18 @@ mod tests {
                 );
             }
         }
+        assert_eq!(
+            registered_zkvm_version(StatelessValidatorKind::Zilkworm, zkVMKind::SP1)?,
+            "v6.4.0"
+        );
+        for zkvm_kind in [zkVMKind::OpenVM, zkVMKind::Zisk] {
+            assert_eq!(
+                registered_zkvm_version(StatelessValidatorKind::Zilkworm, zkvm_kind)
+                    .unwrap_err()
+                    .to_string(),
+                format!("zilkworm-{zkvm_kind} not found in artifact-registry.json")
+            );
+        }
         Ok(())
     }
 
