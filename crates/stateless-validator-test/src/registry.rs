@@ -181,6 +181,11 @@ mod tests {
                 "v0.2.1-alpha",
                 &[zkVMKind::Zisk],
             ),
+            (
+                StatelessValidatorKind::Zilkworm,
+                "local-dev",
+                &[zkVMKind::SP1],
+            ),
         ];
         assert_eq!(registry.stateless_validators.len(), registered.len());
 
