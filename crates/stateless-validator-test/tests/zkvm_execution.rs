@@ -1,4 +1,4 @@
-//! `tests-zkevm@v0.8.4` execution tests for release-backed guests.
+//! `tests-zkevm@v21.0.1` execution tests for release-backed guests.
 //!
 //! Set `STATELESS_VALIDATOR` and `ZKVM` to one pair from `artifact-registry.json`.
 //! Run with `ERE_IMAGE_REGISTRY=ghcr.io/eth-act/ere` to use pre-built Ere images.
@@ -15,9 +15,9 @@ use stateless_validator_test::{
 
 // These fixtures exceed the Ethrex guest memory available on OpenVM and ZisK. SP1 executes them.
 const ETHREX_EXPECTED_RESOURCE_FAILURES: &[&str] = &[
-    "tests/ported_static/stQuadraticComplexityTest/test_return50000.py::test_return50000[fork_Amsterdam-blockchain_test_from_state_test--g1]#block0",
-    "tests/ported_static/stQuadraticComplexityTest/test_return50000_2.py::test_return50000_2[fork_Amsterdam-blockchain_test_from_state_test--g1]#block0",
-    "tests/ported_static/stStaticCall/test_static_return50000_2.py::test_static_return50000_2[fork_Amsterdam-blockchain_test_from_state_test]#block0",
+    "tests/ported_static/stQuadraticComplexityTest/test_return50000.py::test_return50000[fork_Amsterdam-blockchain_test_engine_from_state_test--g1]#payload0",
+    "tests/ported_static/stQuadraticComplexityTest/test_return50000_2.py::test_return50000_2[fork_Amsterdam-blockchain_test_engine_from_state_test--g1]#payload0",
+    "tests/ported_static/stStaticCall/test_static_return50000_2.py::test_static_return50000_2[fork_Amsterdam-blockchain_test_engine_from_state_test]#payload0",
 ];
 
 fn expected_failures(
@@ -87,6 +87,7 @@ fn executes_registered_guest() {
 }
 
 #[test]
+#[ignore = "TODO(tests-zkevm@v21): waiting for Sepolia blocks in the engine format; devnet-8 blocks use the tests-zkevm@v0.8.4 input layout"]
 fn executes_registered_guest_devnet_preset() {
     init_tracing();
     let (stateless_validator, zkvm) = registered_pair();

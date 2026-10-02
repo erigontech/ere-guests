@@ -177,14 +177,15 @@ mod tests {
             StatelessValidatorKind::from_u8(3),
             Some(StatelessValidatorKind::Nimbus)
         );
-        assert_eq!(StatelessValidatorKind::Reth.version(), Some("0.1.0-rc.3"));
         assert_eq!(
-            StatelessValidatorKind::Zesu.version(),
-            Some("tests-glamsterdam-devnet@v8.1.4")
+            StatelessValidatorKind::Ethrex.version(),
+            Some("29.0.0-rc.2")
         );
+        assert_eq!(StatelessValidatorKind::Reth.version(), None);
+        assert_eq!(StatelessValidatorKind::Zesu.version(), None);
         assert_eq!(
             StatelessValidatorKind::Nimbus.version(),
-            Some("v0.1.0-alpha")
+            Some("v0.2.1-alpha")
         );
     }
 }
