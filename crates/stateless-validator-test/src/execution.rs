@@ -6,11 +6,9 @@ use std::{
     time::Instant,
 };
 
-use anyhow::{bail, ensure};
+use anyhow::bail;
 use rayon::prelude::*;
-use stateless_validator_catalog::StatelessValidatorKind;
 use stateless_validator_common::{SszDecode, guest::StatelessValidationResult};
-use stateless_validator_zilkworm::StatelessValidatorZilkwormInput;
 use tracing::{debug, info};
 use tracing_subscriber::EnvFilter;
 
@@ -54,23 +52,8 @@ pub fn init_tracing() {
     });
 }
 
-/// TODO(zilkworm): remove once the Zilkworm guest consumes `statelessInputBytes` natively.
-/// Returns the MFBD stdin and expected public values for a fixture, or `None` when the host
-/// rejects an input the fixture does not validate.
-pub fn zilkworm_input(input: &[u8], output: &[u8]) -> anyhow::Result<Option<(Vec<u8>, Vec<u8>)>> {
-    let valid = StatelessValidationResult::from_ssz_bytes(output)
-        .map_err(|error| anyhow::anyhow!("failed to decode fixture output: {error:?}"))?
-        .successful_validation;
-    match StatelessValidatorZilkwormInput::from_ere_eest(input, valid) {
-        Ok(input) => Ok(Some((input.flat_bundle, input.public_values))),
-        Err(_) if !valid => Ok(None),
-        Err(error) => bail!("failed to build the Zilkworm input: {error:#}"),
-    }
-}
-
 /// Runs `execute` over every fixture in parallel, returning the failures.
 pub fn run_execution(
-    stateless_validator_kind: StatelessValidatorKind,
     fixtures: impl IntoIterator<Item = StatelessValidatorFixture>,
     execute: &(impl Fn(Vec<u8>) -> anyhow::Result<Vec<u8>> + Sync),
 ) -> Vec<ExecutionFailure> {
@@ -85,30 +68,10 @@ pub fn run_execution(
         .filter_map(|fixture| {
             let name = fixture.name;
             let start = Instant::now();
-            // TODO(zilkworm): drop this branch with `zilkworm_input`.
-            let outcome = if stateless_validator_kind == StatelessValidatorKind::Zilkworm {
-                zilkworm_input(
-                    &fixture.stateless_input_bytes,
-                    &fixture.stateless_output_bytes,
-                )
-                .and_then(|input| {
-                    let Some((stdin, expected)) = input else {
-                        return Ok(());
-                    };
-                    let got = execute(stdin)?;
-                    ensure!(
-                        got == expected,
-                        "Public values mismatch, expected {}, got {}",
-                        const_hex::encode_prefixed(expected),
-                        const_hex::encode_prefixed(got)
-                    );
-                    Ok(())
-                })
-            } else {
-                execute(fixture.stateless_input_bytes)
-                    .and_then(|output| matches_output(output, fixture.stateless_output_bytes))
-            };
-            if let Err(err) = outcome.map_err(|err| err.to_string()) {
+            if let Err(err) = execute(fixture.stateless_input_bytes)
+                .and_then(|output| matches_output(output, fixture.stateless_output_bytes))
+                .map_err(|err| err.to_string())
+            {
                 Some(ExecutionFailure { name, error: err })
             } else {
                 debug!("PASS {name}: took {:?}", start.elapsed());
