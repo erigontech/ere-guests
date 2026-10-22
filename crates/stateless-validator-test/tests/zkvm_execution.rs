@@ -106,6 +106,8 @@ const NIMBUS_EXPECTED_WITNESS_FAILURES: &[&str] = &[
     "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_request_queue_read[fork_Amsterdam-request_class_WithdrawalRequest-blockchain_test_engine-missing_storage_root]#payload0",
 ];
 
+const NETHERMIND_EXPECTED_FAILURES: &[&str] = &[];
+
 fn expected_failures(
     stateless_validator: StatelessValidatorKind,
     zkvm: zkVMKind,
@@ -119,7 +121,13 @@ fn expected_failures(
         ],
         (StatelessValidatorKind::Zesu, zkVMKind::Zisk) => &[ZESU_EXPECTED_WITNESS_FAILURES],
         (StatelessValidatorKind::Nimbus, zkVMKind::Zisk) => &[NIMBUS_EXPECTED_WITNESS_FAILURES],
-        (StatelessValidatorKind::Zesu | StatelessValidatorKind::Nimbus, _) => {
+        (StatelessValidatorKind::Nethermind, zkVMKind::Zisk) => &[NETHERMIND_EXPECTED_FAILURES],
+        (
+            StatelessValidatorKind::Zesu
+            | StatelessValidatorKind::Nimbus
+            | StatelessValidatorKind::Nethermind,
+            _,
+        ) => {
             panic!("{stateless_validator}-{zkvm} has no active registry artifacts")
         }
     };
