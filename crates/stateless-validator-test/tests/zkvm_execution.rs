@@ -121,7 +121,9 @@ fn expected_failures(
         (StatelessValidatorKind::Nimbus, zkVMKind::Zisk) => &[NIMBUS_EXPECTED_WITNESS_FAILURES],
         (StatelessValidatorKind::Zilkworm, zkVMKind::SP1) => &[],
         (
-            StatelessValidatorKind::Zesu | StatelessValidatorKind::Nimbus | StatelessValidatorKind::Zilkworm,
+            StatelessValidatorKind::Zesu
+            | StatelessValidatorKind::Nimbus
+            | StatelessValidatorKind::Zilkworm,
             _,
         ) => {
             panic!("{stateless_validator}-{zkvm} has no active registry artifacts")
