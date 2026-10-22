@@ -164,26 +164,18 @@ mod tests {
     fn parses_active_registry() {
         let registry = ArtifactRegistry::load().unwrap();
 
+        // TODO(ere@v0.19): re-add the SP1 and ZisK guests, Zesu and Nimbus included, as they
+        // publish SP1 v6.9 and ZisK v1.3 releases.
         let registered: &[(StatelessValidatorKind, &str, &[zkVMKind])] = &[
             (
                 StatelessValidatorKind::Ethrex,
                 "30.0.0",
-                &[zkVMKind::OpenVM, zkVMKind::SP1, zkVMKind::Zisk],
+                &[zkVMKind::OpenVM],
             ),
             (
                 StatelessValidatorKind::Reth,
                 "0.1.0-rc.5",
-                &[zkVMKind::OpenVM, zkVMKind::SP1, zkVMKind::Zisk],
-            ),
-            (
-                StatelessValidatorKind::Zesu,
-                "tests@v21.0.0",
-                &[zkVMKind::Zisk],
-            ),
-            (
-                StatelessValidatorKind::Nimbus,
-                "v0.2.1-alpha",
-                &[zkVMKind::Zisk],
+                &[zkVMKind::OpenVM],
             ),
         ];
         assert_eq!(registry.stateless_validators.len(), registered.len());
