@@ -116,19 +116,26 @@ mod tests {
 
     #[test]
     fn resolves_artifact_version_from_registry() -> anyhow::Result<()> {
-        // TODO(ere@v0.19): re-add the other SP1 and ZisK guests, Zesu and Nimbus included, as
-        // they publish SP1 v6.9 and ZisK v1.3 releases.
+        // TODO(ere@v0.19): re-add Zesu and Nimbus as they publish ZisK v1.3 releases.
         let registered = [
             (
                 StatelessValidatorKind::Ethrex,
                 zkVMKind::OpenVM,
                 "v2.1.0-preview",
             ),
+            (StatelessValidatorKind::Ethrex, zkVMKind::SP1, "v6.9.0"),
+            (
+                StatelessValidatorKind::Ethrex,
+                zkVMKind::Zisk,
+                "v1.3.2-alpha",
+            ),
             (
                 StatelessValidatorKind::Reth,
                 zkVMKind::OpenVM,
                 "v2.1.0-preview",
             ),
+            (StatelessValidatorKind::Reth, zkVMKind::SP1, "v6.9.0"),
+            (StatelessValidatorKind::Reth, zkVMKind::Zisk, "v1.3.2-alpha"),
             (
                 StatelessValidatorKind::Nethermind,
                 zkVMKind::Zisk,

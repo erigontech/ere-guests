@@ -189,8 +189,8 @@ mod tests {
             StatelessValidatorKind::from_u8(4),
             Some(StatelessValidatorKind::Nethermind)
         );
-        assert_eq!(StatelessValidatorKind::Ethrex.version(), Some("30.0.0"));
-        assert_eq!(StatelessValidatorKind::Reth.version(), Some("0.1.0-rc.5"));
+        assert_eq!(StatelessValidatorKind::Ethrex.version(), Some("30.0.1"));
+        assert_eq!(StatelessValidatorKind::Reth.version(), Some("0.1.0-rc.6"));
         // TODO(ere@v0.19): re-add Zesu and Nimbus as they publish ZisK v1.3 releases.
         assert_eq!(StatelessValidatorKind::Zesu.version(), None);
         assert_eq!(StatelessValidatorKind::Nimbus.version(), None);
