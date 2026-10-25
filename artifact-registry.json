@@ -61,6 +61,20 @@
             ]
         },
         {
+            "name": "nimbus",
+            "version": "v0.3.0-alpha",
+            "artifacts": [
+                {
+                    "zkvm": "sp1",
+                    "zkvm_version": "v6.9.0",
+                    "elf_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.0-alpha/stateless-validator-nimbus-sp1-v6.9.0.elf",
+                    "elf_sha256": "0c0767570b013776205e674697a71c6e7ee20e28e7164d65a8c69b59cffa7547",
+                    "vk_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.0-alpha/stateless-validator-nimbus-sp1-v6.9.0.vk",
+                    "vk_sha256": "58067528361fac6b5969c2b765547a3b2e20e1bfb92e996698b3a063c83c41e2"
+                }
+            ]
+        },
+        {
             "name": "nethermind",
             "version": "2.3.0-preview+2",
             "artifacts": [

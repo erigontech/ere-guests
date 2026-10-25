@@ -69,33 +69,6 @@ const ZESU_EXPECTED_WITNESS_FAILURES: &[&str] = &[
     "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_account_read[fork_Amsterdam-blockchain_test_engine-missing_proof_leaf-access_zero_value_transfer-target_kind_system_address]#payload0",
 ];
 
-// Nimbus rejects valid blocks whose witness leaves out code set earlier in the same transaction: an
-// EIP-7702 delegation marker shared with another account, or code that a CREATE deployed. It
-// accepts missing proofs for accounts and request queues that the block reads but leaves unchanged,
-// and a storage delete whose witness lacks the sibling branch node that the trie collapse needs.
-const NIMBUS_EXPECTED_WITNESS_FAILURES: &[&str] = &[
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_7702.py::test_witness_codes_delegation_same_marker_cleared_then_read[fork_Amsterdam-blockchain_test_engine-clear_in_same_tx]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_7702.py::test_witness_codes_delegation_same_marker_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_authorization]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_7702.py::test_witness_codes_delegation_same_marker_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_call]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_7702.py::test_witness_codes_delegation_same_marker_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_extcodecopy]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_7702.py::test_witness_codes_delegation_same_marker_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_extcodesize]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_7702.py::test_witness_codes_delegation_same_marker_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_top_level]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_bytecodes_contract_creation.py::test_witness_codes_create_same_hash_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_op_call]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_bytecodes_contract_creation.py::test_witness_codes_create_same_hash_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_op_extcodecopy]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_bytecodes_contract_creation.py::test_witness_codes_create_same_hash_then_read_same_tx[fork_Amsterdam-blockchain_test_engine-read_op_extcodesize]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_missing_delete_auxiliary_node[fork_Amsterdam-blockchain_test_engine-sibling_branch]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_account_read[fork_Amsterdam-blockchain_test_engine-missing_proof_leaf-access_fee_recipient_without_tip-target_kind_absent]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_account_read[fork_Amsterdam-blockchain_test_engine-missing_proof_leaf-access_fee_recipient_without_tip-target_kind_eoa]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_account_read[fork_Amsterdam-blockchain_test_engine-missing_proof_leaf-access_fee_recipient_without_tip-target_kind_system_address]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_account_read[fork_Amsterdam-blockchain_test_engine-missing_proof_leaf-access_zero_withdrawal-target_kind_absent]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_account_read[fork_Amsterdam-blockchain_test_engine-missing_proof_leaf-access_zero_withdrawal-target_kind_eoa]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_account_read[fork_Amsterdam-blockchain_test_engine-missing_proof_leaf-access_zero_withdrawal-target_kind_system_address]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_request_queue_read[fork_Amsterdam-request_class_BuilderDepositRequest-blockchain_test_engine-missing_storage_root]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_request_queue_read[fork_Amsterdam-request_class_BuilderExitRequest-blockchain_test_engine-missing_storage_root]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_request_queue_read[fork_Amsterdam-request_class_ConsolidationRequest-blockchain_test_engine-missing_storage_root]#payload0",
-    "tests/amsterdam/eip8025_optional_proofs/test_witness_validation_state.py::test_validation_state_unchanged_request_queue_read[fork_Amsterdam-request_class_WithdrawalRequest-blockchain_test_engine-missing_storage_root]#payload0",
-];
-
 // Nethermind accepts witness trie paths longer than the 64-nibble hashed key.
 const NETHERMIND_EXPECTED_WITNESS_FAILURES: &[&str] = &[
     "tests/amsterdam/eip8025_optional_proofs/test_witness_state_overlength.py::test_witness_state_rejects_overlength_secured_trie_path[fork_Amsterdam-blockchain_test_engine-cumulative_path_exceeds_key_length]#payload0",
@@ -114,7 +87,7 @@ fn expected_failures(
             RETH_EXPECTED_WITNESS_FAILURES,
         ],
         (StatelessValidatorKind::Zesu, zkVMKind::Zisk) => &[ZESU_EXPECTED_WITNESS_FAILURES],
-        (StatelessValidatorKind::Nimbus, zkVMKind::Zisk) => &[NIMBUS_EXPECTED_WITNESS_FAILURES],
+        (StatelessValidatorKind::Nimbus, zkVMKind::SP1 | zkVMKind::Zisk) => &[],
         (StatelessValidatorKind::Nethermind, zkVMKind::Zisk) => {
             &[NETHERMIND_EXPECTED_WITNESS_FAILURES]
         }
