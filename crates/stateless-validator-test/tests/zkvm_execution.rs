@@ -118,10 +118,12 @@ fn expected_failures(
         (StatelessValidatorKind::Nethermind, zkVMKind::Zisk) => {
             &[NETHERMIND_EXPECTED_WITNESS_FAILURES]
         }
+        (StatelessValidatorKind::Zilkworm, zkVMKind::SP1) => &[],
         (
             StatelessValidatorKind::Zesu
             | StatelessValidatorKind::Nimbus
-            | StatelessValidatorKind::Nethermind,
+            | StatelessValidatorKind::Nethermind
+            | StatelessValidatorKind::Zilkworm,
             _,
         ) => {
             panic!("{stateless_validator}-{zkvm} has no active registry artifacts")
