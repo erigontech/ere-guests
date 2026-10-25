@@ -179,7 +179,7 @@ mod tests {
             ),
             (
                 StatelessValidatorKind::Zilkworm,
-                "0.1.0-alpha.6",
+                "0.1.0-alpha.7",
                 &[zkVMKind::SP1],
             ),
         ];
