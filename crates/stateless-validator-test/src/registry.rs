@@ -164,8 +164,7 @@ mod tests {
     fn parses_active_registry() {
         let registry = ArtifactRegistry::load().unwrap();
 
-        // TODO(ere@v0.19): re-add Zesu as it publishes a ZisK v1.3 release, and Nimbus on ZisK once
-        // it publishes a VK generated with the blake3 proving key.
+        // TODO(ere@v0.19): re-add Zesu as it publishes a ZisK v1.3 release.
         let registered: &[(StatelessValidatorKind, &str, &[zkVMKind])] = &[
             (
                 StatelessValidatorKind::Ethrex,
@@ -179,8 +178,8 @@ mod tests {
             ),
             (
                 StatelessValidatorKind::Nimbus,
-                "v0.3.0-alpha",
-                &[zkVMKind::SP1],
+                "v0.3.1-alpha",
+                &[zkVMKind::SP1, zkVMKind::Zisk],
             ),
             (
                 StatelessValidatorKind::Nethermind,

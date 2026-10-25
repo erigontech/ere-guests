@@ -62,15 +62,23 @@
         },
         {
             "name": "nimbus",
-            "version": "v0.3.0-alpha",
+            "version": "v0.3.1-alpha",
             "artifacts": [
                 {
                     "zkvm": "sp1",
                     "zkvm_version": "v6.9.0",
-                    "elf_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.0-alpha/stateless-validator-nimbus-sp1-v6.9.0.elf",
+                    "elf_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.1-alpha/stateless-validator-nimbus-sp1-v6.9.0.elf",
                     "elf_sha256": "0c0767570b013776205e674697a71c6e7ee20e28e7164d65a8c69b59cffa7547",
-                    "vk_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.0-alpha/stateless-validator-nimbus-sp1-v6.9.0.vk",
+                    "vk_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.1-alpha/stateless-validator-nimbus-sp1-v6.9.0.vk",
                     "vk_sha256": "58067528361fac6b5969c2b765547a3b2e20e1bfb92e996698b3a063c83c41e2"
+                },
+                {
+                    "zkvm": "zisk",
+                    "zkvm_version": "v1.3.2-alpha",
+                    "elf_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.1-alpha/stateless-validator-nimbus-zisk-v1.3.2-alpha.elf",
+                    "elf_sha256": "ef0ca20e9755a79971fa6b16d9edb4e74a221e29c3cdbb226644305ffaa064ad",
+                    "vk_url": "https://github.com/status-im/nimbus-zkvm-guests/releases/download/v0.3.1-alpha/stateless-validator-nimbus-zisk-v1.3.2-alpha.vk",
+                    "vk_sha256": "c519eca0df6661558cb104d9fea62ff608012ae5cbfd6b71c0be802e78a46be4"
                 }
             ]
         },

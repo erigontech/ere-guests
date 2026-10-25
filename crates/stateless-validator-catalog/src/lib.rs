@@ -195,7 +195,7 @@ mod tests {
         assert_eq!(StatelessValidatorKind::Zesu.version(), None);
         assert_eq!(
             StatelessValidatorKind::Nimbus.version(),
-            Some("v0.3.0-alpha")
+            Some("v0.3.1-alpha")
         );
         assert_eq!(
             StatelessValidatorKind::Nethermind.version(),
